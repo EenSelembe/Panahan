@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Form Data Peserta Panahan</title>
+  <style>
+    :root {
+      --bg-dark: #0b132b;
+      --bg-card: #1c2541;
+      --accent: #5bc0be;
+      --accent-light: #6fffe9;
+      --text: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Poppins", Arial, sans-serif;
+      background: var(--bg-dark);
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 16px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 420px;
+      background: var(--bg-card);
+      border-radius: 16px;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+      padding: 24px;
+      animation: fadeIn 0.5s ease;
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 0;
+      color: var(--accent-light);
+      font-size: 1.6rem;
+    }
+
+    label {
+      display: block;
+      margin-top: 14px;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px 12px;
+      margin-top: 6px;
+      border-radius: 8px;
+      border: none;
+      font-size: 1rem;
+      background: #3a506b;
+      color: #fff;
+      transition: 0.2s ease;
+    }
+
+    input:focus, select:focus {
+      outline: 2px solid var(--accent-light);
+      background: #4b6584;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 22px;
+      padding: 14px;
+      background: var(--accent);
+      border: none;
+      border-radius: 10px;
+      color: #000;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    button:hover {
+      background: var(--accent-light);
+    }
+
+    .result {
+      margin-top: 22px;
+      background: #3a506b;
+      padding: 16px;
+      border-radius: 12px;
+      display: none;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Responsif */
+    @media (max-width: 480px) {
+      .container {
+        padding: 20px;
+        border-radius: 12px;
+      }
+
+      h1 {
+        font-size: 1.4rem;
+      }
+
+      input, select, button {
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Data Peserta Panahan</h1>
+    <form id="archeryForm">
+      <label>Nama:</label>
+      <input type="text" id="nama" placeholder="Masukkan nama peserta" required />
+
+      <label>Kontingen:</label>
+      <input type="text" id="kontingen" placeholder="Asal kontingen" required />
+
+      <label>Jarak Tembakan:</label>
+      <select id="jarak">
+        <option value="5m">5 meter</option>
+        <option value="10m">10 meter</option>
+        <option value="15m">15 meter</option>
+        <option value="20m">20 meter</option>
+        <option value="25m">25 meter</option>
+        <option value="30m">30 meter</option>
+        <option value="40m">40 meter</option>
+        <option value="50m">50 meter</option>
+      </select>
+
+      <label>Kategori:</label>
+      <select id="gender">
+        <option value="Putra">Putra</option>
+        <option value="Putri">Putri</option>
+      </select>
+
+      <label>Nomor Target:</label>
+      <input type="text" id="target" placeholder="Misal: A1 / B3" required />
+
+      <button type="submit">Simpan Data</button>
+    </form>
+
+    <div class="result" id="resultBox">
+      <h3>Data Tersimpan ✅</h3>
+      <p id="output"></p>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("archeryForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const nama = document.getElementById("nama").value;
+      const kontingen = document.getElementById("kontingen").value;
+      const jarak = document.getElementById("jarak").value;
+      const gender = document.getElementById("gender").value;
+      const target = document.getElementById("target").value;
+
+      const outputText = `
+        <strong>Nama:</strong> ${nama}<br>
+        <strong>Kontingen:</strong> ${kontingen}<br>
+        <strong>Kelas:</strong> ${jarak} ${gender}<br>
+        <strong>Target:</strong> ${target}
+      `;
+
+      document.getElementById("output").innerHTML = outputText;
+      document.getElementById("resultBox").style.display = "block";
+      this.reset();
+    });
+  </script>
+
+</body>
+</html>
